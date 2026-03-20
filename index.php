@@ -1,3 +1,29 @@
+<?php
+
+session_start();
+
+$error = [
+    'login' => $_SESSION['login_error'] ?? '',
+    'register' => $_SESSION['register_error'] ?? ''
+];
+
+$active_form = $_SESSION['active_form'] ?? 'login';
+
+session_unset();
+
+function showError($error) {
+    return !empty($error) ? "<p class='error-message'>$error</p>" : "";
+}
+
+
+function isActiveForm($forName, $activeForm) {
+    return $forName === $activeForm ? 'active' : '';
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,9 +36,10 @@
 
 <body>
     <div class="container">
-        <div class="form-box active" id="login-form">
-            <form action="">
+        <div class="form-box <?= isActiveForm('login', $active_form) ?>" id="login-form">
+            <form action="login_register.php" method="post">
                 <h2>Login</h2>
+                <?=  showError($error['login']); ?>
                 <label for="Email">Email</label>
                 <input type="email" name="email" id="Email" placeholder="Enter your email" required>
                 <label for="Password">Password</label>
@@ -21,12 +48,13 @@
                 <p>Don't have an account? <a href="#" onclick="showFormreg()">Register</a></p>
             </form>
         </div>
-
-        <div class="form-box" id="register-form">
-            <form action="">
+        
+        <div class="form-box <?= isActiveForm('register', $active_form) ?>" id="register-form">            
+            <form action="login_register.php" method="post">
                 <h2>Register</h2>
-                <label for="userName">UserName</label>
-                <input type="text" name="userName" id="userName" placeholder="Enter your username" required>
+                <?=  showError($error['register']); ?>
+                <label for="name">UserName</label>
+                <input type="text" name="name" id="name" placeholder="Enter your username" required>
                 
                 <label for="Email">Email</label>
                 <input type="email" name="email" id="Email" placeholder="Enter your email" required>
@@ -47,20 +75,6 @@
         </div>
     </div>
     <script src="main.js"></script>
-    <script>
-        let regid = document.getElementById("register-form");
-let logid = document.getElementById("login-form")
-
-function showFormreg() {
-    regid.classList.add("active");
-    logid.classList.remove("active");
-}
-
-function showFormlog() {
-    logid.classList.add("active");
-    regid.classList.remove("active");
-}
-    </script>
 </body>
 
 </html>
