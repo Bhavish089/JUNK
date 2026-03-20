@@ -18,7 +18,7 @@
                 <label for="Password">Password</label>
                 <input type="password" name="password" id="Password" placeholder="Enter your password" required>
                 <button type="submit" name="login">Login</button>
-                <p>Don't have an account? <a href="#">Register</a></p>
+                <p>Don't have an account? <a href="#" onclick="showFormreg()">Register</a></p>
             </form>
         </div>
 
@@ -42,11 +42,25 @@
                 </select>
 
                 <button type="submit" name="register">Register</button>
-                <p>Already have an account? <a href="#">Login</a></p>
+                <p>Already have an account? <a href="#" onclick="showFormlog()">Login</a></p>
             </form>
         </div>
-
     </div>
+    <script src="main.js"></script>
+    <script>
+        let regid = document.getElementById("register-form");
+let logid = document.getElementById("login-form")
+
+function showFormreg() {
+    regid.classList.add("active");
+    logid.classList.remove("active");
+}
+
+function showFormlog() {
+    logid.classList.add("active");
+    regid.classList.remove("active");
+}
+    </script>
 </body>
 
 </html>

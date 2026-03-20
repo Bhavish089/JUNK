@@ -19,22 +19,28 @@ body {
 
 .form-box {
     width: 100%;
-    max-height: 450px;
+    max-height: fit-content;
     padding: 30px;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: none;
+    transition: .7s;
 }
 
 .form-box.active {
     display: block;
+    transition: .7s;
 }
 
 h2 {
     font-size: 34px;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 0px;
 }
 
 input, select {
